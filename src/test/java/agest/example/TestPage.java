@@ -1,7 +1,7 @@
 package agest.example;
 
 import agest.BaseTest;
-import agest.base.DriverManager;
+import agest.base.driver.DriverManager;
 import agest.pages.Google.GoogleHomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -9,26 +9,28 @@ import org.testng.annotations.Test;
 
 public class TestPage extends BaseTest{
     GoogleHomePage googleHomePage;
+
     @Test
-    public void test_VerifyGoogleSearch() throws InterruptedException {
+    public void test_VerifyGoogleSearch() {
 
-        // 1. Get the driver from BaseTest
         WebDriver driver = DriverManager.getDriver();
-
-        // 2. Initialize the Page Object
-        // This passes the driver to the page's constructor
         googleHomePage = new GoogleHomePage(driver);
 
-        // 3. Call Page Object methods - NOT driver.get()
+        String searchTerm = "Selenium WebDriver";
+
+        // --- Test Steps ---
+        // These steps are now extremely readable
         googleHomePage.navigateTo();
-        googleHomePage.searchFor("Selenium WebDriver");
 
-        Thread.sleep(1000); // Wait for results to load
+        // This single line does: wait, clear, sendkeys, and submit
+        googleHomePage.searchFor(searchTerm);
 
-        // 4. Get result and assert
+        // This replaces Thread.sleep()
+        googleHomePage.waitForSearchResultPage(searchTerm);
+
+        // --- Assertion ---
         String actualTitle = googleHomePage.getPageTitle();
-        Assert.assertTrue(actualTitle.contains("Selenium WebDriver"), "Page title does not match!");
-
+        Assert.assertTrue(actualTitle.contains(searchTerm), "Page title does not match!");
         System.out.println("Page title is: " + actualTitle);
     }
 }
