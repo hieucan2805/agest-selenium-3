@@ -1,8 +1,8 @@
-package agest.example;
+package selenium.example;
 
-import agest.BaseTest;
-import agest.base.driver.DriverManager;
-import agest.pages.Google.GoogleHomePage;
+import selenium.BaseTest;
+import selenium.base.driver.DriverManager;
+import selenium.pages.Google.GoogleHomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;

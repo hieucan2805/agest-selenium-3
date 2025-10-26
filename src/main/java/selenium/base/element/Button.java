@@ -1,4 +1,4 @@
-package agest.base.element;
+package selenium.base.element;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -5,14 +5,14 @@
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="agest.example.TestPage"/>
+            <class name="selenium.example.TestPage"/>
         </classes>
     </test>
 
     <test name="Run on Firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="agest.example.TestPage"/>
+            <class name="selenium.example.TestPage"/>
         </classes>
     </test>
 

@@ -1,4 +1,4 @@
-package agest.utils;
+package selenium.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

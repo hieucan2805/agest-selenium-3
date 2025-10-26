@@ -1,12 +1,12 @@
-package agest.pages.Google;
+package selenium.pages.Google;
 
-import agest.base.element.Button;
-import agest.base.element.TextInput;
-import agest.pages.BasePage;
+import selenium.base.element.Button;
+import selenium.base.element.TextInput;
+import selenium.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import agest.utils.ConfigReader;
+import selenium.utils.ConfigReader;
 
 // 1. Make the class extend BasePage
 public class GoogleHomePage extends BasePage {
