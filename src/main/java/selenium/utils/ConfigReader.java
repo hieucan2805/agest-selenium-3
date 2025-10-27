@@ -8,38 +8,38 @@ public class ConfigReader {
 
     private static Properties properties;
 
-    // This is a static initializer block.
-    // It runs 'once' when the class is first loaded by JVM.
     static {
-        // Define the path to the properties file
         String path = "src/test/resources/config.properties";
-
         try {
-            // Create a FileInputStream to read the file
             FileInputStream file = new FileInputStream(path);
-
-            // Initialize the Properties object
             properties = new Properties();
-
-            // Load the properties from the file
             properties.load(file);
-
-            // Close the file stream
             file.close();
-
         } catch (IOException e) {
             e.printStackTrace();
-            // This will stop the execution if the config file is not found
             throw new RuntimeException("Config file not found at " + path);
         }
     }
 
     /**
-     * Gets a property value by its key.
-     * @param key The key of the property (e.g., "browser", "url.google")
+     * Gets a property value.
+     * Priority Order:
+     * 1. System Property (from -D command line)
+     * 2. config.properties file
+     *
+     * @param key The key of the property
      * @return The value as a String
      */
     public static String getProperty(String key) {
+        // 1. Check for the property in System Properties first
+        String value = System.getProperty(key);
+
+        if (value != null) {
+            // If found in System Properties, return it
+            return value;
+        }
+
+        // 2. If not found, check in the loaded config.properties file
         return properties.getProperty(key);
     }
 }

@@ -1,5 +1,7 @@
-package selenium.pages.Google;
+package selenium.pages.WebTest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import selenium.base.element.Button;
 import selenium.base.element.TextInput;
 import selenium.pages.BasePage;
@@ -9,47 +11,42 @@ import org.openqa.selenium.support.FindBy;
 import selenium.utils.ConfigReader;
 
 // 1. Make the class extend BasePage
-public class GoogleHomePage extends BasePage {
+public class HerokuApp extends BasePage {
+    private static final Logger log = LogManager.getLogger(HerokuApp.class);
 
     @FindBy(name = "q")
     private WebElement searchBox_raw; // We name it '_raw' to be clear
 
     @FindBy(name = "btnK")
     private WebElement searchButton_raw;
-    public GoogleHomePage(WebDriver driver) {
+
+    public HerokuApp(WebDriver driver) {
         super(driver);
     }
 
-    // 4. Create a public 'getter' method for the custom element
-    // This is the "Factory Method" within the Page Object
     public TextInput getSearchBox() {
-        // This 'wraps' the raw element in our smart 'TextInput' class
         return new TextInput(this.driver, searchBox_raw);
     }
 
-    public Button searchButton(){
-        return new Button(this.driver,searchButton_raw);
+    public Button searchButton() {
+        return new Button(this.driver, searchButton_raw);
     }
 
-    // ... (You could create a getter for the button)
-    // public BaseElement getSearchButton() {
-    //    // Use BaseElement for simple clicks
-    //    return new BaseElement(this.driver, searchButton_raw);
-    // }
 
     // --- Page Action Methods ---
 
     public void navigateTo() {
-        driver.get(ConfigReader.getProperty("url.google"));
-    }
+        String url = ConfigReader.getProperty("url.webtest");
+        log.info("Navigating to URL: {}", url);
+        driver.get(url);    }
 
     /**
      * Performs a search using the smart TextInput element.
+     *
      * @param text The text to search for.
      */
     public void searchFor(String text) {
-        // 5. The page logic is now clean and beautiful
-        // It calls methods on its own custom elements.
+        log.info("Performing search for text: '{}'", text);
         getSearchBox().sendKeys(text);
         getSearchBox().submit();
 

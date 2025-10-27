@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%-5level] %c{1} - %msg%n"/>
+        </Console>
+
+        <File name="FileAppender" fileName="logs/automation.log" append="false">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%t] %c{1} - %msg%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+<!--
+Appenders (Nơi ghi): Chúng ta định nghĩa 2 "nơi ghi" log:
+ - ConsoleAppender: In ra SYSTEM_OUT (Console của IntelliJ).
+ - FileAppender: Ghi vào file logs/automation.log. (append="false" nghĩa là mỗi lần chạy test mới, nó sẽ xóa file log cũ và ghi file mới).
+Loggers (Cái gì ghi):
+ - <Root level="info">: Chúng ta thiết lập cấp độ log tối thiểu cho toàn bộ dự án là INFO. (Các cấp độ: DEBUG < INFO < WARN < ERROR < FATAL).
+ - <AppenderRef>: Ra lệnh cho Root logger gửi log đến cả ConsoleAppender và FileAppender.
+PatternLayout (Định dạng): Đây là cách chúng ta muốn log hiển thị.
+ - %d: Ngày giờ.
+ - %-5level: Cấp độ log (INFO, ERROR...)
+ - %c{1}: Tên class (viết tắt).
+ - %msg%n: Nội dung log và xuống dòng.
+-->

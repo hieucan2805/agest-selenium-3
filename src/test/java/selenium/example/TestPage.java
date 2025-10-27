@@ -2,19 +2,19 @@ package selenium.example;
 
 import selenium.BaseTest;
 import selenium.base.driver.DriverManager;
-import selenium.pages.Google.GoogleHomePage;
+import selenium.pages.WebTest.HerokuApp;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestPage extends BaseTest{
-    GoogleHomePage googleHomePage;
+    HerokuApp googleHomePage;
 
     @Test
     public void test_VerifyGoogleSearch() {
 
         WebDriver driver = DriverManager.getDriver();
-        googleHomePage = new GoogleHomePage(driver);
+        googleHomePage = new HerokuApp(driver);
 
         String searchTerm = "Selenium WebDriver";
 
